@@ -1,0 +1,405 @@
+/*
+Copyright (c) 2024 Subakes Pizzeria
+
+  Uses Tailwind CSS (MIT License): https://github.com/tailwindlabs/tailwindcss
+  Fonts from Google Fonts (Open Font License)
+  Please ensure all custom CSS or animations copied from external sources are attributed.
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 18 12% 12%;
+  --muted: 24 6% 96%;
+  --muted-foreground: 25 5% 45%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 18 12% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 18 12% 12%;
+  --border: 20 5% 90%;
+  --input: 20 5% 90%;
+  --primary: 18 65% 28%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 24 6% 96%;
+  --secondary-foreground: 24 10% 10%;
+  --accent: 25 73% 56%;
+  --accent-foreground: 210 20% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 20% 98%;
+  --ring: 18 65% 28%;
+  --radius: 0.5rem;
+  
+  /* Wood-fired pizzeria colors */
+  --wood-brown: 30 30% 20%;
+  --fire-orange: 16 90% 55%;
+  --rustic-red: 8 70% 45%;
+  --stone-gray: 20 5% 15%;
+  --cream-white: 45 25% 95%;
+  --charcoal-black: 20 10% 8%;
+  --olive-green: 85 30% 40%;
+  --golden-cheese: 45 85% 65%;
+  --warm-amber: 35 80% 60%;
+  --smoke-gray: 210 5% 60%;
+}
+
+.dark {
+  --background: 18 24% 12%;
+  --foreground: 210 20% 98%;
+  --muted: 18 20% 18%;
+  --muted-foreground: 215 20% 65%;
+  --popover: 18 24% 12%;
+  --popover-foreground: 210 20% 98%;
+  --card: 18 24% 12%;
+  --card-foreground: 210 20% 98%;
+  --border: 18 20% 18%;
+  --input: 18 20% 18%;
+  --primary: 25 73% 56%;
+  --primary-foreground: 18 24% 12%;
+  --secondary: 18 20% 18%;
+  --secondary-foreground: 210 20% 98%;
+  --accent: 18 20% 18%;
+  --accent-foreground: 210 20% 98%;
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 210 20% 98%;
+  --ring: 25 73% 56%;
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-script {
+    font-family: 'Dancing Script', cursive;
+  }
+}
+
+@layer components {
+  .wood-texture {
+    background: linear-gradient(135deg, 
+      hsl(var(--wood-brown)), 
+      hsl(var(--charcoal-black)));
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(var(--fire-orange))/10 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(var(--warm-amber))/5 0%, transparent 50%);
+  }
+  
+  .fire-glow {
+    background: radial-gradient(ellipse at center, 
+      hsl(var(--fire-orange))/30 0%, 
+      hsl(var(--rustic-red))/20 50%, 
+      transparent 100%);
+  }
+  
+  .cheese-melt {
+    background: linear-gradient(45deg, 
+      hsl(var(--golden-cheese)), 
+      hsl(var(--warm-amber)));
+    animation: cheese-stretch 3s ease-in-out infinite;
+  }
+  
+  .pizza-bounce {
+    animation: pizza-float 4s ease-in-out infinite;
+  }
+  
+  .fire-flicker {
+    animation: flicker 2s ease-in-out infinite alternate;
+  }
+  
+  .wood-grain {
+    background: linear-gradient(90deg,
+      hsl(var(--wood-brown)) 0%,
+      hsl(var(--charcoal-black)) 20%,
+      hsl(var(--wood-brown)) 40%,
+      hsl(var(--stone-gray)) 60%,
+      hsl(var(--wood-brown)) 80%,
+      hsl(var(--charcoal-black)) 100%);
+    background-size: 200% 100%;
+    animation: wood-flow 8s linear infinite;
+  }
+  
+  .oven-heat {
+    background: radial-gradient(circle at center,
+      hsl(var(--fire-orange))/40 0%,
+      hsl(var(--rustic-red))/30 30%,
+      hsl(var(--charcoal-black))/20 70%,
+      transparent 100%);
+    animation: heat-pulse 3s ease-in-out infinite;
+  }
+  
+  .smoke-effect {
+    background: linear-gradient(180deg,
+      transparent 0%,
+      hsl(var(--smoke-gray))/10 50%,
+      hsl(var(--smoke-gray))/20 100%);
+    animation: smoke-rise 6s ease-out infinite;
+  }
+  
+  .premium-shadow {
+    box-shadow: 
+      0 0 20px hsl(var(--fire-orange))/20,
+      0 0 40px hsl(var(--warm-amber))/10,
+      0 20px 40px hsl(var(--charcoal-black))/30;
+  }
+  
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .cheese-drip {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cheese-drip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      hsl(var(--golden-cheese)) 20%,
+      hsl(var(--warm-amber)) 50%,
+      hsl(var(--golden-cheese)) 80%,
+      transparent 100%);
+    animation: cheese-flow 4s ease-in-out infinite;
+  }
+  
+  .pizza-crust {
+    border: 3px solid hsl(var(--warm-amber));
+    border-radius: 50%;
+    position: relative;
+  }
+  
+  .pizza-crust::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    padding: 2px;
+    background: linear-gradient(45deg, 
+      hsl(var(--fire-orange)), 
+      hsl(var(--golden-cheese)), 
+      hsl(var(--warm-amber)));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: xor;
+  }
+  
+  .leopard-spots {
+    background-image: 
+      radial-gradient(circle at 20% 30%, hsl(var(--charcoal-black))/40 2px, transparent 2px),
+      radial-gradient(circle at 70% 60%, hsl(var(--charcoal-black))/30 3px, transparent 3px),
+      radial-gradient(circle at 40% 80%, hsl(var(--charcoal-black))/35 2px, transparent 2px),
+      radial-gradient(circle at 90% 20%, hsl(var(--charcoal-black))/40 2px, transparent 2px);
+  }
+}
+
+@layer utilities {
+  .border-border {
+    border-color: hsl(var(--border));
+  }
+  .bg-background {
+    background-color: hsl(var(--background));
+  }
+  .text-foreground {
+    color: hsl(var(--foreground));
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+  
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Premium Wood-Fired Pizzeria Animations */
+@keyframes cheese-stretch {
+  0%, 100% { transform: scaleY(1) scaleX(1); }
+  50% { transform: scaleY(1.1) scaleX(0.95); }
+}
+
+@keyframes pizza-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(1deg); }
+  50% { transform: translateY(-5px) rotate(0deg); }
+  75% { transform: translateY(-15px) rotate(-1deg); }
+}
+
+@keyframes flicker {
+  0% { opacity: 1; transform: scale(1); }
+  25% { opacity: 0.8; transform: scale(1.05); }
+  50% { opacity: 1; transform: scale(0.95); }
+  75% { opacity: 0.9; transform: scale(1.02); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes wood-flow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+@keyframes heat-pulse {
+  0%, 100% { 
+    transform: scale(1); 
+    opacity: 0.6; 
+  }
+  50% { 
+    transform: scale(1.2); 
+    opacity: 0.8; 
+  }
+}
+
+@keyframes smoke-rise {
+  0% { 
+    transform: translateY(0px) rotate(0deg); 
+    opacity: 0.8; 
+  }
+  50% { 
+    transform: translateY(-50px) rotate(2deg); 
+    opacity: 0.4; 
+  }
+  100% { 
+    transform: translateY(-100px) rotate(-1deg); 
+    opacity: 0; 
+  }
+}
+
+@keyframes cheese-flow {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes fire-dance {
+  0%, 100% { 
+    transform: rotate(0deg) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  25% { 
+    transform: rotate(2deg) scale(1.05);
+    filter: hue-rotate(10deg);
+  }
+  50% { 
+    transform: rotate(0deg) scale(1.1);
+    filter: hue-rotate(5deg);
+  }
+  75% { 
+    transform: rotate(-2deg) scale(1.05);
+    filter: hue-rotate(-5deg);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px hsl(var(--fire-orange))/30;
+  }
+  50% { 
+    box-shadow: 0 0 40px hsl(var(--fire-orange))/60, 0 0 60px hsl(var(--warm-amber))/40;
+  }
+}
+
+@keyframes cheese-bubble {
+  0% { 
+    transform: scale(1); 
+    border-radius: 50%; 
+  }
+  50% { 
+    transform: scale(1.2); 
+    border-radius: 60% 40% 60% 40%; 
+  }
+  100% { 
+    transform: scale(1); 
+    border-radius: 50%; 
+  }
+}
+
+@keyframes oven-shimmer {
+  0% { 
+    background-position: -200% 0;
+  }
+  100% { 
+    background-position: 200% 0;
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% { 
+    opacity: 0; 
+    transform: scale(0) rotate(0deg); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1) rotate(180deg); 
+  }
+}
+
+/* Advanced particle effects */
+.fire-particle {
+  animation: fire-dance 3s ease-in-out infinite;
+}
+
+.cheese-bubble-effect {
+  animation: cheese-bubble 4s ease-in-out infinite;
+}
+
+.glow-effect {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.shimmer-effect {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--golden-cheese))/20 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: oven-shimmer 3s ease-in-out infinite;
+}
+
+.sparkle-effect {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--golden-brown));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--coffee-brown));
+}
