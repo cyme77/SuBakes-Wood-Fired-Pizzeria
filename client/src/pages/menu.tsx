@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Download, FileText, Flame, Pizza } from "lucide-react";
+import { ArrowLeft, Download, FileText, Pizza } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,52 +24,6 @@ export default function Menu() {
     }, 20);
     return () => clearInterval(interval);
   }, []);
-
-  // Fire particles animation
-  const FireParticles = () => {
-    const [particles, setParticles] = useState<Array<{id: number, x: number, delay: number}>>([]);
-    
-    useEffect(() => {
-      const generateParticles = () => {
-        const newParticles = Array.from({ length: 15 }, (_, i) => ({
-          id: i,
-          x: Math.random() * 100,
-          delay: Math.random() * 3
-        }));
-        setParticles(newParticles);
-      };
-      
-      generateParticles();
-      const interval = setInterval(generateParticles, 6000);
-      return () => clearInterval(interval);
-    }, []);
-
-    return (
-      <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
-        {particles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className="absolute w-2 h-2 bg-[hsl(var(--fire-orange))] rounded-full"
-            style={{ left: `${particle.x}%`, bottom: '0px' }}
-            initial={{ y: 0, opacity: 1, scale: 1 }}
-            animate={{ 
-              y: -window.innerHeight - 100,
-              opacity: [1, 0.8, 0.6, 0],
-              scale: [1, 1.5, 1, 0.5],
-              x: [0, Math.random() * 50 - 25]
-            }}
-            transition={{ 
-              duration: 4,
-              delay: particle.delay,
-              ease: "easeOut",
-              repeat: Infinity,
-              repeatDelay: 2
-            }}
-          />
-        ))}
-      </div>
-    );
-  };
 
   // Full list of menu images (1 to 14)
   const menuImages = [
@@ -103,7 +57,6 @@ export default function Menu() {
             repeat: Infinity
           }}
         >
-          <Flame className="w-16 h-16 text-[hsl(var(--fire-orange))] mx-auto mb-4" />
           <div className="text-4xl font-bold text-[hsl(var(--fire-orange))]">
             Wood-Firing Our Menu...
           </div>
@@ -114,8 +67,6 @@ export default function Menu() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[hsl(var(--charcoal-black))] via-[hsl(var(--rustic-red))]/20 to-[hsl(var(--wood-brown))]">
-      <FireParticles />
-
       {/* Sticky Back Button for Mobile */}
       <div className="sticky top-0 z-50 bg-gradient-to-b from-[hsl(var(--charcoal-black))]/90 to-transparent px-2 pt-2 pb-1 md:hidden flex justify-start">
         <Link href="/">
