@@ -8,7 +8,7 @@ import {
   Sandwich, Drumstick, EggFried, Croissant, CupSoda, Salad, Soup, IceCream, CakeSlice, Mail, Leaf, Apple, Carrot,
   LucidePizza
 } from "lucide-react";
-//cyme
+
 
 // --- Premium Scrollbar CSS (injects global style) ---
 if (typeof window !== "undefined") {
@@ -223,28 +223,6 @@ const slides: Slide[] = [
   // FAB image slow rotation state
   const [fabRotation, setFabRotation] = useState(0);
 
-  // ...existing code...
-// After the last useEffect in Home (before return):
-
-useEffect(() => {
-  function handleScroll() {
-    const max = 120; // px after which image is fully faded
-    const y = window.scrollY;
-    const img = document.getElementById("brand-image");
-    const txt = document.getElementById("brand-text");
-    if (img && txt) {
-      const t = Math.min(1, y / max);
-      img.style.opacity = String(1 - t);
-      txt.style.opacity = String(t);
-    }
-  }
-  window.addEventListener("scroll", handleScroll, { passive: true });
-  // Set initial state
-  setTimeout(() => handleScroll(), 10);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
-// ...existing code...
-
   useEffect(() => {
     const interval = setInterval(() => {
       setFabRotation((prev) => prev + 1);
@@ -255,8 +233,6 @@ useEffect(() => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[hsl(var(--charcoal-black))] via-[hsl(var(--wood-brown))] to-[hsl(var(--rustic-red))] overflow-hidden">
       <CheeseDrops />
-
-      
 
       {/* Hamburger Menu Drawer */}
       <AnimatePresence>
@@ -399,77 +375,41 @@ useEffect(() => {
         }}
         transition={{ type: "spring", damping: 30, stiffness: 200 }}
       />
-      
+
       {/* Navigation */}
-<nav className="fixed top-0 w-full z-50 bg-[hsl(var(--charcoal-black))]/80 backdrop-blur-md border-b border-white/10">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex items-center h-16 relative">
-      {/* Hamburger icon (now always visible) */}
-      <button
-        className="flex items-center px-3 py-2 rounded text-[hsl(var(--fire-orange))] hover:bg-[hsl(var(--fire-orange))]/10 focus:outline-none"
-        onClick={() => setShowHamburgerMenu(true)}
-        aria-label="Open menu"
-      >
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-      {/* Brand name always centered with image-to-text parallax fade */}
-      <div className="flex-1 flex justify-center items-center relative" style={{ minHeight: 56 }}>
-        {/* Parallax Brand Image */}
-        <span
-          id="brand-image"
-          style={{
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%)",
-            transition: "opacity 0.6s cubic-bezier(.4,0,.2,1)",
-            opacity: 1,
-            zIndex: 2,
-            pointerEvents: "none"
-          }}
-        >
-          <img
-            src="/other images/download.png"
-            alt="Subakes Brand"
-            style={{
-              width: 120,
-              height: 48,
-              objectFit: "contain",
-              borderRadius: 12,
-              boxShadow: "0 4px 24px rgba(0,0,0,0.10)"
-            }}
-            draggable={false}
-          />
-        </span>
-        {/* Brand Text & Icons */}
-        <span
-          id="brand-text"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            opacity: 0,
-            transition: "opacity 0.6s cubic-bezier(.4,0,.2,1)",
-            zIndex: 1
-          }}
-        >
-          <Pizza className="h-8 w-8 text-[hsl(var(--fire-orange))] md:block hidden" />
-          <span className="font-bold text-[hsl(var(--cream-white))] text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif tracking-tight transition-all brand-title">
-            Subakes - Wood Fired Pizzaria
-          </span>
-          <Flame className="h-5 w-5 text-[hsl(var(--fire-orange))] md:block hidden" />
-        </span>
-      </div>
-      {/* Desktop/Tablet icons (hidden on mobile) */}
-      <div className="hidden md:flex items-center space-x-4 absolute right-0 top-1/2 -translate-y-1/2">
-        <Pizza className="h-8 w-8 text-[hsl(var(--fire-orange))]" />
-        <Flame className="h-5 w-5 text-[hsl(var(--fire-orange))]" />
-      </div>
-    </div>
-  </div>
-</nav>
+      <nav className="fixed top-0 w-full z-50 bg-[hsl(var(--charcoal-black))]/80 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center h-16 relative">
+            {/* Hamburger icon (now always visible) */}
+            <button
+              className="flex items-center px-3 py-2 rounded text-[hsl(var(--fire-orange))] hover:bg-[hsl(var(--fire-orange))]/10 focus:outline-none"
+              onClick={() => setShowHamburgerMenu(true)}
+              aria-label="Open menu"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            {/* Brand name always centered */}
+            <div className="flex-1 flex justify-center items-center">
+              <div className="flex items-center space-x-3">
+                <Pizza className="h-8 w-8 text-[hsl(var(--fire-orange))] md:block hidden" />
+                <span
+                className="font-bold text-[hsl(var(--cream-white))] text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif tracking-tight transition-all brand-title"
+>
+                  Subakes - Wood Fired Pizzaria
+                </span>
+                <Flame className="h-5 w-5 text-[hsl(var(--fire-orange))] md:block hidden" />
+              </div>
+            </div>
+            {/* Desktop/Tablet icons (hidden on mobile) */}
+            <div className="hidden md:flex items-center space-x-4 absolute right-0 top-1/2 -translate-y-1/2">
+              <Pizza className="h-8 w-8 text-[hsl(var(--fire-orange))]" />
+              <Flame className="h-5 w-5 text-[hsl(var(--fire-orange))]" />
+            </div>
+          </div>
+        </div>
+      </nav>
 
 
 {/* Header Slideshow Section */}
